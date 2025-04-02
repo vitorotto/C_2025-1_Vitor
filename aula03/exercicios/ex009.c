@@ -24,7 +24,7 @@
 
 int main() {
     SetConsoleOutputCP(65001);
-    system("clear");
+    system("cls");
 
     int idAluno;
     printf("Informe o Id do aluno: ");
@@ -39,7 +39,20 @@ int main() {
     scanf("%f", &n3);
 
     // Regra de negocio
+    float me = (n1 + n2 + n3) / 3;
+    float ma = (n1 + (n2 * 2) + ((n3 * 3) + me)) / 7;
     
-    
+    if (ma >= 9) {
+        printf("cód. Aluno: %d | Notas: %.2f, %.2f, %.2f | Média: %.2f | Méd. Aprov: %.2f | Situação: Aprovado | conceito: A", idAluno, n1, n2, n3, me, ma);
+    } else if (ma >= 7 && ma < 9) {
+        printf("cód. Aluno: %d | Notas: %.2f, %.2f, %.2f | Média: %.2f | Méd. Aprov: %.2f | Situação: Aprovado | conceito: B", idAluno, n1, n2, n3, me, ma);
+    } else if (ma >= 6 && ma < 7) {
+        printf("cód. Aluno: %d | Notas: %.2f, %.2f, %.2f | Média: %.2f | Méd. Aprov: %.2f | Situação: Aprovado | conceito: C", idAluno, n1, n2, n3, me, ma);
+    } else if (ma >= 4 && ma < 6) {
+        printf("cód. Aluno: %d | Notas: %.2f, %.2f, %.2f | Média: %.2f | Méd. Aprov: %.2f | Situação: Reprovado | conceito: D", idAluno, n1, n2, n3, me, ma);
+    } else {
+        printf ("cód. Aluno: %d | Notas: %.2f, %.2f, %.2f | Média: %.2f | Méd. Aprov: %.2f | Situação: Reprovado | conceito: E", idAluno, n1, n2, n3, me, ma);
+    }
+
     return 0;
 }
