@@ -12,20 +12,13 @@ int main() {
 
     printf("Insira um valor entre 1 a 10: ");
     scanf("%d", &valor);
-    
-    int cont = 0;
-    while (valor >= 1 && valor <= 10) {
+
+    while (valor < 1 || valor > 10) {
         printf("Insira um valor entre 1 a 10: ");
         scanf("%d", &valor);
-        if (valor >= 1 && valor <= 10) {
-            printf("valor: %d", valor);
-        }
-        cont++;
     }
 
-    if (cont <= 1) {
-        printf("valor: %d", valor);
-    }
+    printf("valor: %d", valor);
 
     return 0;
 }
