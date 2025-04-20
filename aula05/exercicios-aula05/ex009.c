@@ -8,7 +8,7 @@ int main() {
     SetConsoleOutputCP(65001);
     system("cls");
 
-    int tam = 5, contPar = 0, contImpar = 0;
+    int tam = 100, contPar = 0, contImpar = 0;
     int arr[tam], arrPar[tam], arrImpar[tam];
 
     for (int i = 0; i < tam; i++) {
