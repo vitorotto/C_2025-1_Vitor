@@ -9,14 +9,17 @@ int main() {
     system("cls");
 
     int val, soma = 0;
-    printf("Informe valores para somar (0 para encerrar)");
+    printf("Informe valores para somar (0 para encerrar)\n");
 
     while (val != 0) {
         printf("Valor: ");
         scanf("%d", &val);
-
-        printf("soma atual: %d + %d = %d", soma, val, (soma + val));
-        soma += val;
+        
+        if (val != 0) {
+            soma += val;
+            printf("soma atual: %d + %d = %d\n", soma, val, (soma + val));
+        }
+        
     }
 
     printf ("Soma total: %d", soma);
