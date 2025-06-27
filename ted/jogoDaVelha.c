@@ -11,6 +11,7 @@
 #include<stdlib.h>
 #include<time.h>
 
+// Função para selecionar o modo de jogo
 int switchMode() {
     int input;
     printf("Modo de jogo: ");
@@ -21,7 +22,8 @@ int switchMode() {
     return input;
 }
 
-int iniciarTabuleiro() {
+// Função para exibir as posições do tabuleiro
+int posicoesDoTabuleiro() {
     int tabuleiro[3][3];
     int posTab = 1;
     for (int i = 0; i < 3; i++) {
@@ -40,13 +42,7 @@ int iniciarTabuleiro() {
     return 0;
 }
 
-// int atualizarTabuleiro(int posJogada) {
-//     return
-// }
-
-// Função para formatar as posições
-
-
+// Função para sortear o primeiro jogador
 int sortearJogador() {
     int primeiroJogador = rand()%3;
     if (primeiroJogador == 0) {
@@ -55,22 +51,15 @@ int sortearJogador() {
     return primeiroJogador;
 }
 
-int main() {
-
-    system("clear");
-    srand(time(NULL));
-    setbuf(stdin, NULL);
+// Modo PvP
+int modoPvP() {
 
     char letraEscolhida;
-    int jogadorUm = 1, letraJogadorUm;
-    int jogadorDois = 2, letraJogadorDois;
-    // int numJogadas = 9;
+    int letraJogadorUm;
+    int letraJogadorDois;
+    int numJogadas = 9;
 
-    printf("Modo de jogo: ");
-    if (switchMode() == 1) printf("\nPvP\n");
-    else printf("\nPvE\n");
-
-    iniciarTabuleiro();
+    posicoesDoTabuleiro();
 
     // Escolha de letra
     printf("\nJogador 01 - escolha X ou O: \n");
@@ -87,32 +76,161 @@ int main() {
     printf("\nLetra jogador 01: %c", letraJogadorUm);
     printf("\nLetra jogador 02: %c", letraJogadorDois);
 
-
     int primeiroJogador = sortearJogador();
+    int segundoJogador;
+
     if (primeiroJogador == 1) {
-        printf("\nPrimeiro Jogador: %d - letra: %c\n", jogadorUm, letraJogadorUm);
+        printf("\nPrimeiro jogador: %d - letra: %c\n", primeiroJogador, letraJogadorUm);
+        segundoJogador = 2;
+        printf("Segundo jogador: %d - letra: %c\n", segundoJogador, letraJogadorDois);
     } else {
-        printf("\nPrimeiro Jogador: %d - letra %c\n", jogadorDois, letraJogadorDois);
+        printf("\nPrimeiro jogador: %d - letra: %c\n", primeiroJogador, letraJogadorDois);
+        segundoJogador = 1;
+        printf("\nSegundo jogador: %d - letra: %c\n", segundoJogador, letraJogadorUm);
     }
 
-    // while (numJogadas < 9) {
-    //     int posJogada;
-    //     int tabuleiro[3][3];
+    int mtzTab[3][3]; 
 
-    //     printf("Vez do X\n");
-    //     printf("Digite a posiçao que deseja inserir a letra: ");
-    //     scanf("%d", &posJogada);
+    printf("\nTabuleiro inicial:\n");
 
-    //     // Atualizando o tabuleiro
-    //     for(int i = 0; i < 3; i++) {
-    //         for (int j = 0; j < 3; j++){
+    // Inicializando o tabuleiro
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            mtzTab[i][j] = 32; // '0' representa uma posição
+        }
+    }
 
-    //         }
-    //     }
-    //     printf("Vez do O\n");
-    //     printf("Digite a posiçao que deseja inserir a letra: ");
-    //     scanf("%d", &posJogada);
-    // }
+    // Exibindo o tabuleiro inicial
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf("[ ]");
+        }
+        printf("\n");
+    }
+
+    printf("\nIniciando o jogo...\n");
+
+    int jogadorAtual = primeiroJogador;
+    
+    
+    while (numJogadas > 0) {
+        int posicao;
+
+        printf("\nJogador %d - Escolha uma posição: ", jogadorAtual);
+        scanf("%d", &posicao);
+
+        // Verifica se a posição é válida
+        while (posicao < 1 || posicao > 9) {
+            printf("Posição inválida! Tente novamente.\n");
+            printf("Jogador %d - Escolha uma posição: ", jogadorAtual);
+            scanf("%d", &posicao);
+        }
+
+        int linha = (posicao - 1) / 3;
+        int coluna = (posicao - 1) % 3;
+        
+
+        // Verifica se a posição já está ocupada
+        while (mtzTab[linha][coluna] != 32) {
+            printf("Posição já ocupada! Tente novamente.\n");
+            printf("Jogador %d - Escolha uma posição: ", jogadorAtual);
+            scanf("%d", &posicao);
+
+            // Verifica se a posição é válida
+            while (posicao < 1 || posicao > 9) {
+                printf("Posição inválida! Tente novamente.\n");
+                printf("Jogador %d - Escolha uma posição: ", jogadorAtual);
+                scanf("%d", &posicao);
+            }
+
+            linha = (posicao - 1) / 3;
+            coluna = (posicao - 1) % 3;
+        }
+
+        // Marca a posição escolhida pelo jogador
+        if (jogadorAtual == 1) {
+            mtzTab[linha][coluna] = letraJogadorUm;
+        } else {
+            mtzTab[linha][coluna] = letraJogadorDois;
+        }
+
+        system("clear");
+
+        // Exibe o tabuleiro atualizado
+        printf("\nTabuleiro atualizado:\n");
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (mtzTab[i][j] == 32) {
+                    printf("[ ]");
+                } else {
+                    printf("[%c]", mtzTab[i][j]);
+                }
+            }
+        printf("\n");
+        }
+
+        // Verifica se há um vencedor
+        // Verifica linhas
+        for (int i = 0; i < 3; i++) {
+            if (mtzTab[i][0] == mtzTab[i][1] && mtzTab[i][1] == mtzTab[i][2] && mtzTab[i][0] != 32) {
+                printf("\nJogador %d venceu!\n", jogadorAtual);
+                return 0;
+            }
+        }
+
+        // Verifica colunas
+        for (int j = 0; j < 3; j++) {
+            if (mtzTab[0][j] == mtzTab[1][j] && mtzTab[1][j] == mtzTab[2][j] && mtzTab[0][j] != 32) {
+                printf("\nJogador %d venceu!\n", jogadorAtual);
+                return 0;
+            }
+        }
+
+        // Verifica diagonais
+        if ((mtzTab[0][0] == mtzTab[1][1] && mtzTab[1][1] == mtzTab[2][2] && mtzTab[0][0] != 32) ||
+            (mtzTab[0][2] == mtzTab[1][1] && mtzTab[1][1] == mtzTab[2][0] && mtzTab[0][2] != 32)) {
+            printf("\nJogador %d venceu!\n", jogadorAtual);
+            return 0;
+        }
+
+        // Alterna o jogador
+        if (jogadorAtual == 1) {
+            jogadorAtual = 2;
+        } else {
+            jogadorAtual = 1;
+        }
+
+        // Empate
+        if (numJogadas == 1) {
+            printf("\nDeu velha! Não há mais jogadas disponíveis.\n");
+            return 0;
+        }
+
+        // Decrementa o número de jogadas restantes
+        numJogadas--;
+
+    }
+    return 0;
+}
+
+// Modo PvE
+int modoPvE() {
+    // Implementar lógica do modo PvE
+    printf("Modo PvE ainda não implementado.\n");
+    return 0;
+}
+
+int main() {
+
+    system("clear");
+    srand(time(NULL));
+    setbuf(stdin, NULL);
+
+    if (switchMode() == 1) {
+        printf("\nPvP\n");
+        modoPvP();
+    }
+    else printf("\nPvE\n");
 
     return 0;
 }
