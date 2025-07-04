@@ -18,7 +18,7 @@ void menu() {
     printf("3. Registrar saída\n");
     printf("4. Registrar entrada\n");
     printf("5. Realizar revisão\n");
-    printf("6. Sair\n");
+    printf("6. Sair\n");a
     printf("\nEscolha uma opção: ");
 }
 int verificaSeListaVazia(int count) {
