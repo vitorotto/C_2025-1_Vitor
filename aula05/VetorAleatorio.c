@@ -1,7 +1,6 @@
 #include<stdio.h>
 //Necessária para função rand()
 #include<stdlib.h>
-#include<windows.h>
 #include<time.h>
 
 
