@@ -3,7 +3,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-int tamVet = 2;
+int tamVet = 5;
 
 struct Pessoa {
     char nome[50];
