@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int tamVetor = 2;
+int tamVetor = 3;
 
 typedef struct
 {
@@ -25,7 +25,7 @@ int main()
         fgets(vetLivros[i].livro, sizeof(vetLivros[i].livro), stdin);
         vetLivros[i].livro[strcspn(vetLivros[i].livro, "\n")] = 0;
         setbuf(stdin, NULL);
-        printf("\nInforme o nome do autor do livro \"%s\" :", vetLivros[i].livro);
+        printf("\nInforme o nome do autor do livro \"%s\": ", vetLivros[i].livro);
         fgets(vetLivros[i].autor, sizeof(vetLivros[i].autor), stdin);
         vetLivros[i].autor[strcspn(vetLivros[i].autor, "\n")] = 0;
         setbuf(stdin, NULL);
@@ -51,7 +51,7 @@ int main()
     }
 
     int filtro;
-    printf("\nInforme o filtro de ano: (ex: 2010)");
+    printf("\nFiltrar acima do ano: (ex: 2010) ");
     scanf("%d", &filtro);
 
     printf("\nLIVROS CADASTRADOS ---------------------");
