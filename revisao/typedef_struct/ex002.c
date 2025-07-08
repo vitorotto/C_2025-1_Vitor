@@ -21,6 +21,13 @@ int main() {
         fgets(vetContatos[i].telefone, sizeof(vetContatos[i].telefone), stdin);
     }
 
+    // Exibindo os contatos
+    for (int i = 0; i < 2; i++) {
+        printf("\nContato %d", i);
+        printf("\nNome: %s\n", vetContatos[i].nome);
+        printf("Num: %s", vetContatos[i].telefone);
+    }
+
 
     return 0;
 }
